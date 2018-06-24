@@ -89,3 +89,7 @@ def printable_time(current_time):
     minute = printable_minute(readable_time)
 
     return year, month, day, day_of_week, hour, minute, meridian
+
+def printable_time_string(current_time):
+    year, month, day, day_of_week, hour, minute, meridian = printable_time(current_time)
+    return "{} {} {} {} {}:{} {}".format(day_of_week, month, day, year, hour, minute, meridian)
