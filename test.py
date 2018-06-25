@@ -8,7 +8,8 @@ from lib.util import printable_year,\
     printable_meridian,\
     printable_minute,\
     printable_time,\
-    printable_time_string
+    printable_time_string,\
+    printable_sun
 
 class YearTest(unittest.TestCase):
     def setUp(self):
@@ -138,3 +139,18 @@ class PrintableStringTimeTest(unittest.TestCase):
 
     def test_string_time(self):
         self.assertEqual("Sunday June 24 2018 12:00 PM", printable_time_string(self.d1.timestamp()))
+
+class SunriseTest(unittest.TestCase):
+    def setUp(self):
+        self.sunrise = datetime.datetime(2018, 6, 25, 5, 38, 0)
+        self.sunset = datetime.datetime(2018, 6, 25, 20, 30, 0)
+
+    def test_sunrise(self):
+        self.assertEqual("5:38 AM", printable_sun(self.sunrise.timestamp()))
+
+class SunsetTest(unittest.TestCase):
+    def setUp(self):
+        self.sunset = datetime.datetime(2018, 6, 25, 20, 30, 0)
+
+    def test_sunset(self):
+        self.assertEqual("8:30 PM", printable_sun(self.sunset.timestamp()))

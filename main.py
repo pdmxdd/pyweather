@@ -1,7 +1,7 @@
 import requests
 import os
 # from lib.util import printable_time
-from lib.util import printable_time_string
+from lib.util import printable_time_string, printable_sun
 API_KEY = os.environ["DARKSKY_API"]
 C_LAT = "38.557552"
 C_LONG = "-90.376152"
@@ -27,6 +27,8 @@ if __name__ == "__main__":
     print("{}".format(current_summary))
     print("{}F".format(current_temp_f))
     print("UV Index: {}".format(current_uv))
+    print("Sunrise: {}".format(printable_sun(data["daily"]["data"][0]["sunriseTime"])))
+    print("Sunset: {}".format(printable_sun(data["daily"]["data"][0]["sunsetTime"])))
     #print(data["currently"]["summary"])
     #print(data["currently"]["temperature"])
     #print(data["daily"]["data"][0]["sunriseTime"])
