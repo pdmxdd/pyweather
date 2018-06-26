@@ -1,4 +1,6 @@
 .env
 .idea
 env_pyweather
-lib/__pycache__/*
+.enviropy
+enviropy/
+*__pycache__/

@@ -2,9 +2,14 @@ import requests
 import os
 # from lib.util import printable_time
 from lib.util import printable_time_string, printable_sun
-API_KEY = os.environ["DARKSKY_API"]
-C_LAT = "38.557552"
-C_LONG = "-90.376152"
+
+from enviropy.util import get_enviropy
+
+enviropy = get_enviropy()
+
+API_KEY = enviropy["API_KEY"]
+C_LAT = enviropy["C_LAT"]
+C_LONG = enviropy["C_LONG"]
 
 if __name__ == "__main__":
     r = requests.get("https://api.darksky.net/forecast/{}/{},{}".format(API_KEY, C_LAT, C_LONG))
