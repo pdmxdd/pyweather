@@ -1,4 +1,6 @@
 import datetime
+import googlemaps
+from enviropy.util import get_enviropy
 
 def printable_year(dt):
     return dt.year
@@ -101,4 +103,12 @@ def printable_sun(sunrise_time):
     minute = printable_minute(readable_time)
     return "{}:{} {}".format(hour, minute, meridian)
 
-
+def get_location_data_from_address(address_string):
+    enviropy = get_enviropy()
+    gmaps = googlemaps.Client(key=enviropy["GOOGLE_API"])
+    geocode_result = gmaps.geocode(address_string)
+    lat = geocode_result[0]['geometry']['location']['lat']
+    long = geocode_result[0]['geometry']['location']['lng']
+    formatted_address = geocode_result[0]['formatted_address']
+    place_id = geocode_result[0]['place_id']
+    return lat, long, formatted_address, place_id
