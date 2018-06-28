@@ -1,18 +1,20 @@
-import requests
-import googlemaps
+# import requests
+# import googlemaps
 # import os
 # from lib.util import printable_time
-from lib.util import printable_time_string, printable_sun
+# from lib.util import printable_time_string, printable_sun
 
-from enviropy.util import get_enviropy
+# from enviropy.util import get_enviropy
+from lib.util import get_weather_from_address
 
-enviropy = get_enviropy()
+# enviropy = get_enviropy()
 
-API_KEY = enviropy["API_KEY"]
-C_LAT = enviropy["C_LAT"]
-C_LONG = enviropy["C_LONG"]
+# API_KEY = enviropy["API_KEY"]
+# _LAT = enviropy["C_LAT"]
+# C_LONG = enviropy["C_LONG"]
 
 if __name__ == "__main__":
+    '''
     r = requests.get("https://api.darksky.net/forecast/{}/{},{}".format(API_KEY, C_LAT, C_LONG))
     data = r.json()
     current_summary = data["currently"]["summary"]
@@ -28,3 +30,6 @@ if __name__ == "__main__":
     print("UV Index: {}".format(current_uv))
     print("Sunrise: {}".format(printable_sun(data["daily"]["data"][0]["sunriseTime"])))
     print("Sunset: {}".format(printable_sun(data["daily"]["data"][0]["sunsetTime"])))
+    '''
+    addr = "511 Joshua Drive, Crestwood, MO"
+    get_weather_from_address(addr)

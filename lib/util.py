@@ -1,6 +1,7 @@
 import datetime
 import googlemaps
 from enviropy.util import get_enviropy
+import requests
 
 def printable_year(dt):
     return dt.year
@@ -112,3 +113,30 @@ def get_location_data_from_address(address_string):
     formatted_address = geocode_result[0]['formatted_address']
     place_id = geocode_result[0]['place_id']
     return lat, long, formatted_address, place_id
+
+def get_lat_long_from_address(address_string):
+    enviropy = get_enviropy()
+    gmaps = googlemaps.Client(key=enviropy["GOOGLE_API"])
+    geocode_result = gmaps.geocode(address_string)
+    lat = geocode_result[0]['geometry']['location']['lat']
+    long = geocode_result[0]['geometry']['location']['lng']
+    return lat, long
+
+def get_weather_from_address(address_string):
+    enviropy = get_enviropy()
+    lat, long = get_lat_long_from_address(address_string)
+    r = requests.get("https://api.darksky.net/forecast/{}/{},{}".format(enviropy["API_KEY"], lat, long))
+    data = r.json()
+    current_summary = data["currently"]["summary"]
+    current_temp_f = data["currently"]["temperature"]
+    current_time = data["currently"]["time"]
+    current_humidity = data["currently"]["humidity"]
+    current_uv = data["currently"]["uvIndex"]
+    time_string = printable_time_string(current_time)
+    print(time_string)
+    print("Currently in Crestwood")
+    print("{}".format(current_summary))
+    print("{}F".format(current_temp_f))
+    print("UV Index: {}".format(current_uv))
+    print("Sunrise: {}".format(printable_sun(data["daily"]["data"][0]["sunriseTime"])))
+    print("Sunset: {}".format(printable_sun(data["daily"]["data"][0]["sunsetTime"])))
