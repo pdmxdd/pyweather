@@ -3,8 +3,10 @@ import googlemaps
 from enviropy.util import get_enviropy
 import requests
 
+
 def printable_year(dt):
     return dt.year
+
 
 def printable_month(dt):
     m = ""
@@ -35,8 +37,10 @@ def printable_month(dt):
         m = "December"
     return m
 
+
 def printable_day(dt):
     return dt.day
+
 
 def printable_day_of_week(dt):
     day_of_w = ""
@@ -57,6 +61,7 @@ def printable_day_of_week(dt):
         day_of_w = "Sunday"
     return day_of_w
 
+
 def printable_hour(dt):
     almost_h = dt.hour
     h = almost_h % 12
@@ -65,6 +70,7 @@ def printable_hour(dt):
 
     return h
 
+
 def printable_meridian(dt):
     almost_h = dt.hour
     m = "PM"
@@ -72,6 +78,7 @@ def printable_meridian(dt):
         m = "AM"
 
     return m
+
 
 def printable_minute(dt):
     m = dt.minute
@@ -93,9 +100,11 @@ def printable_time(current_time):
 
     return year, month, day, day_of_week, hour, minute, meridian
 
+
 def printable_time_string(current_time):
     year, month, day, day_of_week, hour, minute, meridian = printable_time(current_time)
     return "{} {} {} {} {}:{} {}".format(day_of_week, month, day, year, hour, minute, meridian)
+
 
 def printable_sun(sunrise_time):
     readable_time = datetime.datetime.fromtimestamp(sunrise_time)
@@ -103,6 +112,7 @@ def printable_sun(sunrise_time):
     hour = printable_hour(readable_time)
     minute = printable_minute(readable_time)
     return "{}:{} {}".format(hour, minute, meridian)
+
 
 def get_location_data_from_address(address_string):
     enviropy = get_enviropy()
@@ -114,6 +124,7 @@ def get_location_data_from_address(address_string):
     place_id = geocode_result[0]['place_id']
     return lat, long, formatted_address, place_id
 
+
 def get_lat_long_from_address(address_string):
     enviropy = get_enviropy()
     gmaps = googlemaps.Client(key=enviropy["GOOGLE_API"])
@@ -121,6 +132,7 @@ def get_lat_long_from_address(address_string):
     lat = geocode_result[0]['geometry']['location']['lat']
     long = geocode_result[0]['geometry']['location']['lng']
     return lat, long
+
 
 def get_weather_from_address(address_string):
     enviropy = get_enviropy()
@@ -137,6 +149,7 @@ def get_weather_from_address(address_string):
     print("Currently in Crestwood")
     print("{}".format(current_summary))
     print("{}F".format(current_temp_f))
+    print("{}% Humidity".format(current_humidity * 100))
     print("UV Index: {}".format(current_uv))
     print("Sunrise: {}".format(printable_sun(data["daily"]["data"][0]["sunriseTime"])))
     print("Sunset: {}".format(printable_sun(data["daily"]["data"][0]["sunsetTime"])))

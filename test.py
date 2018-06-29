@@ -11,6 +11,7 @@ from lib.util import printable_year,\
     printable_time_string,\
     printable_sun
 
+
 class YearTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24, 0, 4, 10)
@@ -21,6 +22,7 @@ class YearTest(unittest.TestCase):
         self.assertEqual(2018, printable_year(self.d1))
         self.assertEqual(2014, printable_year(self.d2))
         self.assertEqual(1776, printable_year(self.d3))
+
 
 class MonthTest(unittest.TestCase):
     def setUp(self):
@@ -33,6 +35,7 @@ class MonthTest(unittest.TestCase):
         self.assertEqual("January", printable_month(self.d2))
         self.assertEqual("December", printable_month(self.d3))
 
+
 class DayTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24, 0, 4, 10)
@@ -44,6 +47,7 @@ class DayTest(unittest.TestCase):
         self.assertEqual(1, printable_day(self.d2))
         self.assertEqual(31, printable_day(self.d3))
 
+
 class DayOfWeekTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24)
@@ -54,6 +58,7 @@ class DayOfWeekTest(unittest.TestCase):
         self.assertEqual("Sunday", printable_day_of_week(self.d1))
         self.assertEqual("Thursday", printable_day_of_week(self.d2))
         self.assertEqual("Wednesday", printable_day_of_week(self.d3))
+
 
 class HourTest(unittest.TestCase):
     def setUp(self):
@@ -68,6 +73,7 @@ class HourTest(unittest.TestCase):
         self.assertEqual(3, printable_hour(self.d3))
         self.assertEqual(6, printable_hour(self.d4))
 
+
 class MeridianTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24, 12, 0, 0)
@@ -81,6 +87,7 @@ class MeridianTest(unittest.TestCase):
         self.assertEqual("AM", printable_meridian(self.d3))
         self.assertEqual("PM", printable_meridian(self.d4))
 
+
 class MinuteTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24, 12, 0, 0)
@@ -93,6 +100,7 @@ class MinuteTest(unittest.TestCase):
         self.assertEqual("15", printable_minute(self.d2))
         self.assertEqual("59", printable_minute(self.d3))
         self.assertEqual("08", printable_minute(self.d4))
+
 
 class TimeTest(unittest.TestCase):
     def setUp(self):
@@ -126,12 +134,14 @@ class TimeTest(unittest.TestCase):
     def test_minute(self):
         self.assertEqual("00", self.minute)
 
+
 class PrintableTimeTest(unittest.TestCase):
     def setUp(self):
         self.d1 = datetime.datetime(2018, 6, 24, 12, 0, 0)
 
     def test_printable_time(self):
         self.assertEqual((2018, "June", 24, "Sunday", 12, "00", "PM"), printable_time(self.d1.timestamp()))
+
 
 class PrintableStringTimeTest(unittest.TestCase):
     def setUp(self):
@@ -140,6 +150,7 @@ class PrintableStringTimeTest(unittest.TestCase):
     def test_string_time(self):
         self.assertEqual("Sunday June 24 2018 12:00 PM", printable_time_string(self.d1.timestamp()))
 
+
 class SunriseTest(unittest.TestCase):
     def setUp(self):
         self.sunrise = datetime.datetime(2018, 6, 25, 5, 38, 0)
@@ -147,6 +158,7 @@ class SunriseTest(unittest.TestCase):
 
     def test_sunrise(self):
         self.assertEqual("5:38 AM", printable_sun(self.sunrise.timestamp()))
+
 
 class SunsetTest(unittest.TestCase):
     def setUp(self):
