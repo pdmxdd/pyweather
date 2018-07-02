@@ -143,13 +143,16 @@ def get_weather_from_address(address_string):
     current_temp_f = data["currently"]["temperature"]
     current_time = data["currently"]["time"]
     current_humidity = data["currently"]["humidity"]
+    current_humidity = str(current_humidity * 100)
+    if len(current_humidity) > 5:
+        current_humidity = current_humidity[0:5]
     current_uv = data["currently"]["uvIndex"]
     time_string = printable_time_string(current_time)
     print(time_string)
     print("Currently in Crestwood")
     print("{}".format(current_summary))
     print("{}F".format(current_temp_f))
-    print("{}% Humidity".format(current_humidity * 100))
+    print("{}% Humidity".format(current_humidity))
     print("UV Index: {}".format(current_uv))
     print("Sunrise: {}".format(printable_sun(data["daily"]["data"][0]["sunriseTime"])))
     print("Sunset: {}".format(printable_sun(data["daily"]["data"][0]["sunsetTime"])))
